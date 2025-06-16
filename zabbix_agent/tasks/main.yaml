@@ -33,7 +33,7 @@
 - name: Gera autenticacao no Zabbix via APÌ em {{ zabbix_server }}
   uri:
     url: "{{ zabbix_server_api_url }}"
-    validate_certs: "{{ zabbix_server_validate_certs }}"
+    validate_certs: false
     method: POST
     return_content: true
     body: |
