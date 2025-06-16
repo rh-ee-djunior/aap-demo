@@ -41,8 +41,8 @@
         "jsonrpc": "2.0",
         "method": "user.login",
         "params": {
-          "user": "{{ zabbix_username }}",
-          "password": "{{ zabbix_password }}"
+          "user": "ansible",
+          "password": "Redhat123"
         },
         "id": 1,
         "auth": null
