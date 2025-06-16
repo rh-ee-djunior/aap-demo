@@ -1,0 +1,17 @@
+---
+zabbix_repo: "EXAMPLE_Zabbix_Zabbix_4_2_RHEL_8"
+
+zabbix_local_hostname: "{{ ansible_hostname }}"
+zabbix_local_ip: "{{ ansible_default_ipv4.address }}"
+
+zabbix_register_host: true
+zabbix_server: "zabbix.example.local"
+zabbix_server_http_port: "443"
+zabbix_server_protocol: "https"
+zabbix_server_validate_certs: false
+zabbix_server_context: ""
+zabbix_server_api_url: "{{ zabbix_server_protocol }}://{{ zabbix_server }}:{{ zabbix_server_http_port }}{{ zabbix_server_context }}/api_jsonrpc.php"
+zabbix_templates:
+  - templateid: 10001
+zabbix_groups:
+  - groupid: 59

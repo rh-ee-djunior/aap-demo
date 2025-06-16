@@ -1,0 +1,85 @@
+---
+- name: Verificando variaveis obrigatorias
+  assert:
+    that:
+      - zabbix_username is defined
+      - zabbix_password is defined
+    fail_msg: "Verifique se as variaveis zabbix_username e zabbix_password foram informadas"
+  when: zabbix_register_host
+
+- name: Habilitando repositorio {{ zabbix_repo }}
+  rhsm_repository:
+    name: "{{ zabbix_repo }}"
+    state: enabled
+
+- name: Instalar ou atualizar o zabbix-agent
+  yum:
+    name: zabbix-agent
+    state: latest
+
+- name: Configurando o zabbix-agent
+  ansible.builtin.template:
+    src: zabbix-agent.conf.j2
+    dest: /etc/zabbix/zabbix-agent.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Restart zabbix-agent
+
+- name: Gera autenticacao no Zabbix via APÌ em {{ zabbix_server }}
+  uri:
+    url: "{{ zabbix_server_api_url }}"
+    validate_certs: "{{ zabbix_server_validate_certs }}"
+    method: POST
+    return_content: true
+    body: |
+      {
+        "jsonrpc": "2.0",
+        "method": "user.login",
+        "params": {
+          "user": "{{ zabbix_username }}",
+          "password": "{{ zabbix_password }}"
+        },
+        "id": 1,
+        "auth": null
+      }
+    status_code: 200
+    headers:
+      Content-Type: "application/json"
+  register: zabbix_login
+  when: zabbix_register_host
+
+- name: Cria host no Zabbix via API em {{ zabbix_server }}
+  uri:
+    url: "{{ zabbix_server_api_url }}"
+    validate_certs: "{{ zabbix_server_validate_certs }}"
+    method: POST
+    return_content: true
+    body: |
+      {
+        "jsonrpc": "2.0",
+        "method": "host.create",
+        "params": {
+          "host": "{{ zabbix_local_hostname }}",
+          "interfaces": [
+            {
+              "type": 1,
+              "main": 1,
+              "useip": 1,
+              "ip": {{ zabbix_local_ip }},
+              "dns": "",
+              "port": "10050"
+            }
+          ],
+          "groups": {{  zabbix_groups | to_json }},
+          "templates": {{ zabbix_templates | to_json }}
+        },
+        "auth": {{ zabbix_login.json.result | to_json }},
+        "id": 1
+      }
+    status_code: 200
+    body_format: json
+    headers:
+      Content-Type: "application/json"
+  when: zabbix_register_host
