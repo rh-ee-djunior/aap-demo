@@ -79,7 +79,7 @@
               "port": "10050"
             }
           ],
-          "groups": [{"groupid":2}],
+          "groups": {{ zabbix_groups | to_json }},
           "templates": [{"templateid":10001}]
         },
         "auth": "{{ zabbix_login.json.result }}",
