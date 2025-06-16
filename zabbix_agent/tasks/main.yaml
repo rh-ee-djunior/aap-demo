@@ -53,6 +53,10 @@
   register: zabbix_login
   when: zabbix_register_host
 
+- name: debug
+  ansible.builtin.debug: 
+    msg: "{{ zabbix_login }}"
+  
 - name: Cria host no Zabbix via API em {{ zabbix_server }}
   uri:
     url: "{{ zabbix_server_api_url }}"
