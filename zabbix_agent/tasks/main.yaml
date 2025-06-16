@@ -7,7 +7,7 @@
     fail_msg: "Verifique se as variaveis zabbix_username e zabbix_password foram informadas"
   when: zabbix_register_host
 
-- name: Habilitando repositorio {{ zabbix_repo }}
+- name: Habilitando repositorio zabbix
   ansible.builtin.yum_repository:
     name: zabbix-6
     description: Zabbix 6 
