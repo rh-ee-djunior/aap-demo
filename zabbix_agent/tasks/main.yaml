@@ -82,7 +82,7 @@
           "groups": [{"groupid":2}],
           "templates": [{"templateid":10001}]
         },
-        "auth": "0b7d073ca3de966409be3b454b15652f",
+        "auth": "{{ zabbix_login.json.result }}",
         "id": 1
       }
     status_code: 200
