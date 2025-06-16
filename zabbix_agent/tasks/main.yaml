@@ -23,7 +23,7 @@
 - name: Configurando o zabbix-agent
   ansible.builtin.template:
     src: zabbix-agent.conf.j2
-    dest: /etc/zabbix/zabbix-agent.conf
+    dest: /etc/zabbix/zabbix-agentd.conf
     owner: root
     group: root
     mode: '0644'
