@@ -13,7 +13,7 @@
 
 - name: Firewall permits access to zabbix service
   ansible.posix.firewalld:
-    port: 10050
+    port: 10050/tcp
     permanent: true
     state: enabled
     immediate: true
