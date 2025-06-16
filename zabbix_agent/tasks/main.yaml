@@ -89,4 +89,9 @@
     body_format: json
     headers:
       Content-Type: "application/json"
+  register: zabbix_register_result
   when: zabbix_register_host
+
+- name: debug
+  ansible.builtin.debug: 
+    msg: "{{ zabbix_register_result }}"
