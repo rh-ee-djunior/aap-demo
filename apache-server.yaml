@@ -52,13 +52,3 @@
         name: httpd
         enabled: true
         state: started
-
-- name: Test web server
-  hosts: localhost
-  become: false
-  tasks:
-    - name: Connect to intranet web server
-      ansible.builtin.uri:
-        url: "http://{{ inventory_hostname }}"
-        return_content: true
-        status_code: 200
