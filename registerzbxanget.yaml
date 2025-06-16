@@ -15,6 +15,7 @@
         zabbix_password: "Redhat123"
         zabbix_templates:
           - templateid: 10001
+          - templateid: 10265
         zabbix_groups:
           - groupid: 20     
           
