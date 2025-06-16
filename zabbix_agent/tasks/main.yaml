@@ -80,7 +80,7 @@
             }
           ],
           "groups": {{ zabbix_groups | to_json }},
-          "templates": [{"templateid":10001}]
+          "templates": {{ zabbix_templates | to_json }}
         },
         "auth": "{{ zabbix_login.json.result }}",
         "id": 1
