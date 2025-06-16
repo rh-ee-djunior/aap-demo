@@ -1,4 +1,23 @@
 ---
+- name: Latest version of httpd and firewalld installed
+  ansible.builtin.dnf:
+    name:
+      - firewalld
+    state: latest
+    
+- name: Firewall enabled and running
+  ansible.builtin.service:
+    name: firewalld
+    enabled: true
+    state: started
+
+- name: Firewall permits access to zabbix service
+  ansible.posix.firewalld:
+    port: 10050
+    permanent: true
+    state: enabled
+    immediate: true
+
 - name: Verificando variaveis obrigatorias
   assert:
     that:
