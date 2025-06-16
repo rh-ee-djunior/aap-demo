@@ -5,8 +5,8 @@
     - role: zabbix_agent
       vars:
         zabbix_local_hostname: "{{ inventory_hostname }}"
-        zabbix_local_ip: "{{ public_ip_address }}"
-        zabbix_server: "ec2-52-67-255-50.sa-east-1.compute.amazonaws.com"
+        zabbix_local_ip: "{{ private_ip_address }}"
+        zabbix_server: "ip-10-0-1-150.sa-east-1.compute.internal"
         zabbix_server_http_port: "80"
         zabbix_server_protocol: "http"
         zabbix_server_context: "/zabbix"
