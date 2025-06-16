@@ -70,15 +70,15 @@
               "type": 1,
               "main": 1,
               "useip": 1,
-              "ip": {{ zabbix_local_ip }},
+              "ip": "{{ zabbix_local_ip }}",
               "dns": "",
               "port": "10050"
             }
           ],
-          "groups": {{  zabbix_groups | to_json }},
-          "templates": {{ zabbix_templates | to_json }}
+          "groups": [{"groupid":2}],
+          "templates": [{"templateid":10001}]
         },
-        "auth": {{ zabbix_login.json.result | to_json }},
+        "auth": "0b7d073ca3de966409be3b454b15652f",
         "id": 1
       }
     status_code: 200
