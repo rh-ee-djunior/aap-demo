@@ -1,6 +1,6 @@
 --- 
 - name: register on zabbix
-  hosts: all:!localhost
+  hosts: all
   roles:
     - role: zabbix_agent
       vars:
@@ -20,7 +20,7 @@
           - groupid: 20
           
 - name: Install and configure apache-server 
-  hosts: all:!localhost
+  hosts: all
   tasks:
     - name: Latest version of httpd and firewalld installed
       ansible.builtin.dnf:
