@@ -16,5 +16,5 @@
         zabbix_templates:
           - templateid: 10001
         zabbix_groups:
-          - groupid: 2     
+          - groupid: 20     
           
