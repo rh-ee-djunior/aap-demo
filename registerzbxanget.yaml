@@ -1,6 +1,6 @@
 --- 
 - name: register on zabbix
-  host: all
+  hosts: all
   roles:
     - role: zabbix_agent
       vars:
