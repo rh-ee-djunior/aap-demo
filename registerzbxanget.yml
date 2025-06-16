@@ -1,0 +1,11 @@
+--- 
+- name: register on zabbix 
+  host: all 
+  roles:
+    - role: zabbix_agent 
+      vars:
+        zabbix_local_hostname: "{{ inventory_hostname }}"
+        zabbix_local_ip: "{{ public_ip_address }}"
+        zabbix_username: "ansible"
+        zabbix_register_host: true
+        zabbix_password: "Redhat123"
