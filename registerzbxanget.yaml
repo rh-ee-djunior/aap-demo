@@ -6,7 +6,7 @@
       vars:
         zabbix_local_hostname: "{{ inventory_hostname }}"
         zabbix_local_ip: "{{ public_ip_address }}"
-        zabbix_server: "http://ec2-52-67-255-50.sa-east-1.compute.amazonaws.com"
+        zabbix_server: "ec2-52-67-255-50.sa-east-1.compute.amazonaws.com"
         zabbix_server_http_port: "80"
         zabbix_server_protocol: "http"
         zabbix_server_context: "/zabbix"
