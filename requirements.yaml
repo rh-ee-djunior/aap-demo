@@ -1,0 +1,6 @@
+---
+collections:
+  - name: dynatrace.oneagent
+    source: https://galaxy.ansible.com
+  - name: dynatrace.event_driven_ansible
+    source: https://galaxy.ansible.com
