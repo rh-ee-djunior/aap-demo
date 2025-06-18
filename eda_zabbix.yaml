@@ -8,8 +8,7 @@
   tasks:
     - name: Exibir variáveis recebidas do EDA
       ansible.builtin.debug:
-        msg: "Recebido via EDA -> Host: {{ zabbix_host }} | Evento: {{ zabbix_event }}"
-      when: inventory_hostname == zabbix_host
+        msg: "Recebido via EDA: Host={{ zabbix_host }}|Evento={{ zabbix_event }}"
 
     - name: Verificar serviço httpd
       ansible.builtin.systemd:
