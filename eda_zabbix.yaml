@@ -13,8 +13,7 @@
     - name: Exibir zabbix_host
       ansible.builtin.debug:
         msg: "|{{ zabbix_host }}|"
-        
-        
+          
     - name: Exibir inventory_hostname
       ansible.builtin.debug:
         msg: "|{{ inventory_hostname }}|"
