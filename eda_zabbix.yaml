@@ -2,8 +2,8 @@
   hosts: all
   become: true
   vars:
-    zabbix_host: "{{ ansible_eda.event.payload.host | default('unknown') }}"
-    zabbix_event: "{{ ansible_eda.event.payload.event | default('undefined') }}"
+    zabbix_host: "{{ ansible_eda.host | default('unknown') }}"
+    zabbix_event: "{{ ansible_eda.event | default('undefined') }}"
 
   tasks:
     - name: Exibir variáveis recebidas do EDA
