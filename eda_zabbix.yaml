@@ -8,28 +8,28 @@
   tasks:
     - name: Exibir variáveis recebidas do EDA
       ansible.builtin.debug:
-        msg: "Recebido via EDA -> Host: '{{ zabbix_host }}' | Evento: {{ zabbix_event }}"
-      when: inventory_name == zabbix_host
+        msg: "Recebido via EDA -> Host: [{{ zabbix_host }}] | Evento: {{ zabbix_event }}"
+      when: inventory_hostname == zabbix_host
 
     - name: Verificar serviço httpd
       ansible.builtin.systemd:
         name: httpd
       register: httpd_status
       ignore_errors: true
-      when: inventory_name == zabbix_host 
+      when: inventory_hostname == zabbix_host 
 
     - name: Enviar debug se httpd está ativo
       ansible.builtin.debug:
         msg: "HTTPD está OK no {{ zabbix_host }} - Evento: {{ zabbix_event }}"
-      when: httpd_status.status.ActiveState == "active" and inventory_name == zabbix_host
+      when: httpd_status.status.ActiveState == "active" and inventory_hostname == zabbix_host
 
     - name: Reiniciar httpd se estiver parado
       ansible.builtin.systemd:
         name: httpd
         state: restarted
-      when: httpd_status.status.ActiveState != "active" and inventory_name == zabbix_host
+      when: httpd_status.status.ActiveState != "active" and inventory_hostname == zabbix_host
 
     - name: Informar que o serviço foi reiniciado
       ansible.builtin.debug:
         msg: "HTTPD estava parado e foi reiniciado no host {{ zabbix_host }}"
-      when: httpd_status.status.ActiveState != "active" and inventory_name == zabbix_host
+      when: httpd_status.status.ActiveState != "active" and inventory_hostname == zabbix_host
