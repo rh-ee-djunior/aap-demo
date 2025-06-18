@@ -9,7 +9,7 @@
     - name: Exibir zabbix_host
       ansible.builtin.debug:
         msg: "|{{ zabbix_host }}|"
-      run_unce: true 
+      run_once: true 
     
     - name: Reiniciar httpd se estiver parado
       ansible.builtin.systemd:
