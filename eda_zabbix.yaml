@@ -1,5 +1,5 @@
 - name: Health check do  trigger Zabbix
-  hosts: all
+  hosts: "{{ ansible_eda.event.payload.host | default('unknown') }}"
   become: true
   vars:
     zabbix_host: "{{ ansible_eda.event.payload.host | default('unknown') }}"
