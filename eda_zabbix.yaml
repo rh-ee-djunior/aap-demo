@@ -1,0 +1,33 @@
+- name: Health check do  trigger Zabbix
+  hosts: all
+  become: true
+  vars:
+    zabbix_host: "{{ ansible_eda.event.payload.host | default('unknown') }}"
+    zabbix_event: "{{ ansible_eda.event.payload.event | default('undefined') }}"
+
+  tasks:
+    - name: Exibir variáveis recebidas do EDA
+      ansible.builtin.debug:
+        msg: "Recebido via EDA -> Host: {{ zabbix_host }} | Evento: {{ zabbix_event }}"
+
+    - name: Verificar serviço httpd
+      ansible.builtin.systemd:
+        name: httpd
+      register: httpd_status
+      ignore_errors: true
+
+    - name: Enviar debug se httpd está ativo
+      ansible.builtin.debug:
+        msg: "HTTPD está OK no {{ zabbix_host }} - Evento: {{ zabbix_event }}"
+      when: httpd_status.status.ActiveState == "active"
+
+    - name: Reiniciar httpd se estiver parado
+      ansible.builtin.systemd:
+        name: httpd
+        state: restarted
+      when: httpd_status.status.ActiveState != "active"
+
+    - name: Informar que o serviço foi reiniciado
+      ansible.builtin.debug:
+        msg: "HTTPD estava parado e foi reiniciado no host {{ zabbix_host }}"
+      when: httpd_status.status.ActiveState != "active"
