@@ -51,7 +51,7 @@
 
 - name: Gera autenticacao no Zabbix via APÌ em {{ zabbix_server }}
   uri:
-    url: "http://ec2-54-94-239-193.sa-east-1.compute.amazonaws.com//zabbix/api_jsonrpc.php"
+    url: "http://ec2-54-94-239-193.sa-east-1.compute.amazonaws.com/zabbix/api_jsonrpc.php"
     validate_certs: false
     method: POST
     return_content: true
