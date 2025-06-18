@@ -17,6 +17,6 @@
         - run_job_template:
             name: "HealthCheck"
             organization: "Default"
-            extra_data:
+            extra_vars:
               host: "{{ event.payload.host | default('') }}"
               event: "{{ event.payload.event | default('') }}"
