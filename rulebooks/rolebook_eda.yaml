@@ -18,4 +18,6 @@
             name: "HealthCheck"
             organization: "Default"
             job_args:
-              limit: "{{ event.payload.host | default('unknown') }}"
+              extra_vars:
+                host: "{{ event.payload.host | default('') }}"
+                event: "{{ event.payload.event | default('') }}"
