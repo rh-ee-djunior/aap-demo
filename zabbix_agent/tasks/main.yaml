@@ -18,14 +18,6 @@
     state: enabled
     immediate: true
 
-- name: Verificando variaveis obrigatorias
-  assert:
-    that:
-      - zabbix_username is defined
-      - zabbix_password is defined
-    fail_msg: "Verifique se as variaveis zabbix_username e zabbix_password foram informadas"
-  when: zabbix_register_host
-
 - name: Habilitando repositorio zabbix
   ansible.builtin.yum_repository:
     name: zabbix-6
