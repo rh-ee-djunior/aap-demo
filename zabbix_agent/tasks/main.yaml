@@ -51,8 +51,8 @@
 
 - name: Gera autenticacao no Zabbix via APÌ em {{ zabbix_server }}
   uri:
-    url: "http://ip-10-0-1-198.sa-east-1.compute.internal/zabbix/api_jsonrpc.php"
-    validate_certs: false
+    url: "{{ zabbix_server_api_url }}"
+    validate_certs: "{{ zabbix_server_validate_certs }}"
     method: POST
     return_content: true
     body: |
