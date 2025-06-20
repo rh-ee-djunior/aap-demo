@@ -10,5 +10,5 @@
         
     - name: Informar que o serviço foi reiniciado
       ansible.builtin.debug:
-        msg: "HTTPD estava parado e foi reiniciado no host {{ zabbix_host }}"
+        msg: "HTTPD estava parado e foi reiniciado."
         
