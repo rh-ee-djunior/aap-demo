@@ -2,12 +2,7 @@
   hosts: all
   become: true
 
-  tasks:
-    - name: Exibir zabbix_host
-      ansible.builtin.debug:
-        msg: "|{{ zabbix_host }}|"
-      run_once: true 
-    
+  tasks:    
     - name: Reiniciar httpd se estiver parado
       ansible.builtin.systemd:
         name: httpd
