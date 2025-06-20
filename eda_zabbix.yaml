@@ -1,9 +1,6 @@
 - name: Health check do  trigger Zabbix
   hosts: all
   become: true
-  vars:
-    zabbix_host: "{{ host | default('unknown') }}"
-    zabbix_event: "{{ event | default('undefined') }}"
 
   tasks:
     - name: Exibir zabbix_host
@@ -15,9 +12,8 @@
       ansible.builtin.systemd:
         name: httpd
         state: restarted
-      when: inventory_hostname == zabbix_host
-
+        
     - name: Informar que o serviço foi reiniciado
       ansible.builtin.debug:
         msg: "HTTPD estava parado e foi reiniciado no host {{ zabbix_host }}"
-      when: inventory_hostname == zabbix_host
+        
