@@ -1,14 +1,22 @@
-- name: Health check do  trigger Zabbix
+---
+- name: Zabbix HTTP Fail Monitor
   hosts: all
-  become: true
+  sources:
+    - ansible.eda.webhook:
+        port: 5000
+        path: /httpfail
 
-  tasks:    
-    - name: Reiniciar httpd se estiver parado
-      ansible.builtin.systemd:
-        name: httpd
-        state: restarted
-        
-    - name: Informar que o serviço foi reiniciado
-      ansible.builtin.debug:
-        msg: "HTTPD estava parado e foi reiniciado."
-        
+  rules:
+    - name: Executar Health Check via AAP se HTTP falhar
+      condition: event.payload.event is defined and event.payload.event == "httpfail"
+      actions:
+        - debug:
+            msg: >
+              DEBUG EDA: host={{ event.payload.host | default('') }},
+              event={{ event.payload.event | default('') }}
+        - run_job_template:
+            name: "HealthCheck"
+            organization: "Default"
+            extra_vars:
+              host: "{{ event.payload.host | default('') }}"
+              event: "{{ event.payload.event | default('') }}"
