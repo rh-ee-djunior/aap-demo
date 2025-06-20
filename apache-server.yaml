@@ -45,9 +45,7 @@
         zabbix_server_http_port: "80"
         zabbix_server_protocol: "http"
         zabbix_server_context: "/zabbix"
-        zabbix_username: "ansible"
         zabbix_register_host: true
-        zabbix_password: "Redhat123"
         zabbix_templates:
           - templateid: 10001
           - templateid: 10265
