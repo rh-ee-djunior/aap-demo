@@ -1,9 +1,6 @@
 - name: Health check do  trigger Zabbix
   hosts: all
   become: true
-  vars:
-    zabbix_host: "{{ host | default('unknown') }}"
-    zabbix_event: "{{ event | default('undefined') }}"
 
   tasks:
     - name: Exibir zabbix_host
