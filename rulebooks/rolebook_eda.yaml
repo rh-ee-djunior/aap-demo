@@ -19,5 +19,4 @@
             organization: "Default"
             job_args:
               extra_vars:
-                host: "{{ event.payload.host | default('') }}"
-                event: "{{ event.payload.event | default('') }}"
+                zabbix_host: "{{ event.payload.host | default('') }}"
